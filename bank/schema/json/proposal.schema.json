@@ -1,0 +1,307 @@
+{
+  "$ref": "#/definitions/Proposal",
+  "definitions": {
+    "Proposal": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "indicator_id": {
+          "type": "string"
+        },
+        "requested_by": {
+          "type": "string"
+        },
+        "requested_on": {
+          "type": "string"
+        },
+        "sources_allowed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "requested",
+            "drafted",
+            "in_review",
+            "approved",
+            "rejected"
+          ]
+        },
+        "draft_modules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_:\\-./]*$"
+              },
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "consent",
+                  "identification",
+                  "disaggregation",
+                  "indicator",
+                  "satisfaction",
+                  "feedback",
+                  "custom"
+                ]
+              },
+              "title": {
+                "type": "object",
+                "properties": {
+                  "en": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "en"
+                ],
+                "additionalProperties": {
+                  "anyOf": [
+                    {
+                      "not": {}
+                    },
+                    {
+                      "type": "string"
+                    }
+                  ]
+                }
+              },
+              "intro": {
+                "$ref": "#/definitions/Proposal/properties/draft_modules/items/properties/title"
+              },
+              "respondent": {
+                "type": "string",
+                "minLength": 1
+              },
+              "mode": {
+                "type": "string",
+                "enum": [
+                  "interview",
+                  "observation",
+                  "kii",
+                  "fgd",
+                  "measurement"
+                ]
+              },
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "item_id": {
+                      "type": "string",
+                      "pattern": "^[a-z][a-z0-9_]*$"
+                    },
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "note",
+                        "text",
+                        "integer",
+                        "decimal",
+                        "date",
+                        "select_one",
+                        "select_multiple",
+                        "geopoint",
+                        "image",
+                        "calculate",
+                        "repeat_group"
+                      ]
+                    },
+                    "list": {
+                      "type": "string"
+                    },
+                    "label": {
+                      "$ref": "#/definitions/Proposal/properties/draft_modules/items/properties/title"
+                    },
+                    "hint": {
+                      "$ref": "#/definitions/Proposal/properties/draft_modules/items/properties/title"
+                    },
+                    "construct": {
+                      "type": "string"
+                    },
+                    "dimension": {
+                      "type": "string"
+                    },
+                    "respondent": {
+                      "$ref": "#/definitions/Proposal/properties/draft_modules/items/properties/respondent"
+                    },
+                    "mode": {
+                      "$ref": "#/definitions/Proposal/properties/draft_modules/items/properties/mode"
+                    },
+                    "core": {
+                      "type": "boolean",
+                      "default": false
+                    },
+                    "lock": {
+                      "type": "string",
+                      "enum": [
+                        "locked",
+                        "options_adaptable",
+                        "free"
+                      ],
+                      "default": "locked"
+                    },
+                    "visibility": {
+                      "type": "string",
+                      "enum": [
+                        "respondent",
+                        "enumerator"
+                      ],
+                      "default": "respondent"
+                    },
+                    "relevant": {
+                      "type": "object",
+                      "properties": {
+                        "ref": {
+                          "type": "string"
+                        },
+                        "op": {
+                          "type": "string",
+                          "enum": [
+                            "=",
+                            "!=",
+                            "in",
+                            "not_in",
+                            "selected"
+                          ]
+                        },
+                        "values": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "minItems": 1
+                        }
+                      },
+                      "required": [
+                        "ref",
+                        "op",
+                        "values"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "relevant_note": {
+                      "type": "string"
+                    },
+                    "required": {
+                      "type": "boolean"
+                    },
+                    "flag_values": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "threshold_param": {
+                      "type": "string"
+                    },
+                    "source": {
+                      "type": "object",
+                      "properties": {
+                        "ref": {
+                          "type": "string"
+                        },
+                        "citation": {
+                          "type": "string"
+                        },
+                        "licence": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "ref"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "approved_languages": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "pattern": "^[a-z]{2,3}(-[A-Za-z]{2,4})?$"
+                      }
+                    },
+                    "repeat_over_param": {
+                      "type": "string"
+                    },
+                    "sub_items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/Proposal/properties/draft_modules/items/properties/items/items"
+                      }
+                    }
+                  },
+                  "required": [
+                    "item_id",
+                    "type",
+                    "label",
+                    "respondent",
+                    "mode"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "minutes_per_item": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "id",
+              "kind",
+              "title",
+              "respondent",
+              "mode",
+              "items"
+            ],
+            "additionalProperties": false
+          },
+          "default": []
+        },
+        "decisions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "by": {
+                "type": "string"
+              },
+              "on": {
+                "type": "string"
+              },
+              "decision": {
+                "type": "string"
+              },
+              "note": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "by",
+              "on",
+              "decision"
+            ],
+            "additionalProperties": false
+          },
+          "default": []
+        }
+      },
+      "required": [
+        "id",
+        "indicator_id",
+        "requested_on",
+        "sources_allowed",
+        "status"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

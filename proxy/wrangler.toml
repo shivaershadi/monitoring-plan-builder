@@ -1,0 +1,20 @@
+name = "oms-ai-proxy"
+main = "src/worker.ts"
+compatibility_date = "2026-09-01"
+
+# Route the Worker under the Pages site so the app calls a relative path, e.g.
+#   routes = [{ pattern = "studio.example.com/api/*", zone_name = "example.com" }]
+# For a *.pages.dev site without a custom domain, bind the Worker as a Pages Function instead (see README).
+
+[[kv_namespaces]]
+binding = "USAGE"
+id = "REPLACE_WITH_KV_NAMESPACE_ID"
+
+[vars]
+DAILY_TOKEN_CAP = "2000000"
+ALLOWED_ORIGIN = "https://REPLACE.pages.dev"
+ANTHROPIC_VERSION = "2023-06-01"
+
+# Secrets (never in this file):
+#   wrangler secret put ANTHROPIC_API_KEY
+#   wrangler secret put STUDIO_TOKEN   (optional)

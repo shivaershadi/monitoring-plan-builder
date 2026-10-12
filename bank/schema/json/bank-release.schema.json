@@ -1,0 +1,64 @@
+{
+  "$ref": "#/definitions/BankRelease",
+  "definitions": {
+    "BankRelease": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string"
+        },
+        "packages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "file": {
+                "type": "string"
+              },
+              "competency": {
+                "type": "string",
+                "enum": [
+                  "ss",
+                  "wash",
+                  "icla",
+                  "edu",
+                  "pfv",
+                  "mpc"
+                ]
+              },
+              "package_version": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "file",
+              "competency",
+              "package_version"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "shared_modules_file": {
+          "type": "string"
+        },
+        "changelog": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        }
+      },
+      "required": [
+        "version",
+        "date",
+        "packages"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

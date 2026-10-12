@@ -1,0 +1,10 @@
+{
+  "version": "2026.10.0",
+  "date": "2026-10-12",
+  "packages": [
+    { "file": "packages/ss-emergency-shelter.json", "competency": "ss", "package_version": "2026.10.0" }
+  ],
+  "changelog": [
+    "2026.10.0: first v2 release; Emergency Shelter converted from the prototype content layer (5 mandatory indicators supported, 7 suggested listed as not yet supported)."
+  ]
+}

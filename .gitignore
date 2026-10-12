@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.env
+.env.*
+proxy/node_modules/
+proxy/.wrangler/
+proxy/.dev.vars
+*.log
+.DS_Store

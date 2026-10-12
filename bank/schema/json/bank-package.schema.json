@@ -1,0 +1,995 @@
+{
+  "$ref": "#/definitions/BankPackage",
+  "definitions": {
+    "BankPackage": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "type": "number",
+          "const": 2
+        },
+        "package_id": {
+          "type": "string"
+        },
+        "competency": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "enum": [
+                "ss",
+                "wash",
+                "icla",
+                "edu",
+                "pfv",
+                "mpc"
+              ]
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "name"
+          ],
+          "additionalProperties": false
+        },
+        "version": {
+          "type": "string"
+        },
+        "generated_from": {
+          "type": "string"
+        },
+        "global_rules": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "default": {}
+        },
+        "tocs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              },
+              "source_toolkit": {
+                "type": "string"
+              },
+              "note": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "version"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "toc": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "level": {
+                "type": "string",
+                "enum": [
+                  "Outcome",
+                  "Output",
+                  "Impact"
+                ],
+                "default": "Outcome"
+              }
+            },
+            "required": [
+              "id",
+              "toc",
+              "name"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "indicators": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "gors_uid": {
+                "type": "string"
+              },
+              "toc": {
+                "type": "string"
+              },
+              "result": {
+                "type": "string"
+              },
+              "level": {
+                "type": "string",
+                "enum": [
+                  "Outcome",
+                  "Output",
+                  "Impact"
+                ],
+                "default": "Outcome"
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "mandatory",
+                  "suggested"
+                ]
+              },
+              "modality": {
+                "type": "string",
+                "enum": [
+                  "any",
+                  "in-kind",
+                  "CVA"
+                ],
+                "default": "any"
+              },
+              "title_template": {
+                "type": "string"
+              },
+              "support": {
+                "type": "string",
+                "enum": [
+                  "supported",
+                  "not_yet_supported",
+                  "proposal_pending"
+                ]
+              },
+              "content_status": {
+                "type": "string",
+                "enum": [
+                  "approved",
+                  "proposal_derived",
+                  "draft"
+                ],
+                "default": "approved"
+              },
+              "measurement_kind": {
+                "type": "string",
+                "enum": [
+                  "questionnaire",
+                  "measurement",
+                  "count",
+                  "scale",
+                  "pre_post"
+                ],
+                "default": "questionnaire"
+              },
+              "locked": {
+                "type": "object",
+                "properties": {
+                  "purpose": {
+                    "type": "string"
+                  },
+                  "definition": {
+                    "type": "string"
+                  },
+                  "calculation": {
+                    "type": "object",
+                    "properties": {
+                      "numerator": {
+                        "type": "string"
+                      },
+                      "denominator": {
+                        "type": "string"
+                      },
+                      "counting_rule": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "numerator",
+                      "denominator",
+                      "counting_rule"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "min_disaggregation": {
+                    "type": "string"
+                  },
+                  "data_source": {
+                    "type": "string"
+                  },
+                  "methodology": {
+                    "type": "string"
+                  },
+                  "frequency": {
+                    "type": "string"
+                  },
+                  "triangulation": {
+                    "type": "string"
+                  },
+                  "analysis": {
+                    "type": "string"
+                  },
+                  "limitations": {
+                    "type": "string"
+                  },
+                  "reporting_ref": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "purpose",
+                  "definition",
+                  "calculation",
+                  "min_disaggregation"
+                ],
+                "additionalProperties": false
+              },
+              "parameters": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "key": {
+                      "type": "string",
+                      "pattern": "^[a-z][a-z0-9_]*$"
+                    },
+                    "label": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "duration",
+                        "percent",
+                        "integer",
+                        "text",
+                        "list",
+                        "multiselect",
+                        "choice"
+                      ]
+                    },
+                    "required": {
+                      "type": "boolean",
+                      "default": false
+                    },
+                    "guidance": {
+                      "type": "string"
+                    },
+                    "default": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      ]
+                    },
+                    "recommended": {
+                      "type": "string"
+                    },
+                    "range": {
+                      "type": "array",
+                      "minItems": 2,
+                      "maxItems": 2,
+                      "items": [
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "number"
+                        }
+                      ]
+                    },
+                    "allowed": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "max_months": {
+                      "type": "number"
+                    },
+                    "fixed_items": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "fixed_item_hints": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "default_items": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "options": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "required_options": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "recommended_options": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "choices": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string"
+                          },
+                          "label": {
+                            "type": "string"
+                          },
+                          "explanation": {
+                            "type": "string"
+                          },
+                          "recommended": {
+                            "type": "boolean"
+                          },
+                          "source": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "value",
+                          "label"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "depends_on": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "key",
+                    "label",
+                    "type",
+                    "guidance"
+                  ],
+                  "additionalProperties": false
+                },
+                "default": []
+              },
+              "timing": {
+                "type": "object",
+                "properties": {
+                  "anchor": {
+                    "type": "string",
+                    "enum": [
+                      "activity_start",
+                      "activity_end",
+                      "handover",
+                      "distribution",
+                      "training_end",
+                      "session_end",
+                      "term_end",
+                      "custom"
+                    ]
+                  },
+                  "offset": {
+                    "type": "object",
+                    "properties": {
+                      "value": {
+                        "type": "number",
+                        "exclusiveMinimum": 0
+                      },
+                      "unit": {
+                        "type": "string",
+                        "enum": [
+                          "days",
+                          "weeks",
+                          "months"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "value",
+                      "unit"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "window": {
+                    "$ref": "#/definitions/BankPackage/properties/indicators/items/properties/timing/properties/offset"
+                  },
+                  "parameter_key": {
+                    "type": "string"
+                  },
+                  "per_round": {
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "note": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "anchor",
+                  "offset",
+                  "window"
+                ],
+                "additionalProperties": false
+              },
+              "respondents": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "default": []
+              },
+              "modules": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "default": []
+              },
+              "guides": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "respondent": {
+                      "$ref": "#/definitions/BankPackage/properties/indicators/items/properties/respondents/items"
+                    },
+                    "mode": {
+                      "type": "string",
+                      "enum": [
+                        "kii",
+                        "fgd"
+                      ]
+                    },
+                    "purpose": {
+                      "type": "string"
+                    },
+                    "questions": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "label": {
+                            "type": "object",
+                            "properties": {
+                              "en": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "en"
+                            ],
+                            "additionalProperties": {
+                              "anyOf": [
+                                {
+                                  "not": {}
+                                },
+                                {
+                                  "type": "string"
+                                }
+                              ]
+                            }
+                          },
+                          "probes": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/definitions/BankPackage/properties/indicators/items/properties/guides/items/properties/questions/items/properties/label"
+                            }
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "label"
+                        ],
+                        "additionalProperties": false
+                      }
+                    }
+                  },
+                  "required": [
+                    "respondent",
+                    "mode",
+                    "questions"
+                  ],
+                  "additionalProperties": false
+                },
+                "default": []
+              },
+              "bundles": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "indicator_id": {
+                      "type": "string"
+                    },
+                    "relation": {
+                      "type": "string",
+                      "enum": [
+                        "pairs_with",
+                        "requires",
+                        "conditional_on",
+                        "alternative_modality"
+                      ]
+                    },
+                    "note": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "indicator_id",
+                    "relation"
+                  ],
+                  "additionalProperties": false
+                },
+                "default": []
+              },
+              "applicability": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "default": []
+              },
+              "numerator_rule_text": {
+                "type": "string"
+              },
+              "sources": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "ref": {
+                      "type": "string"
+                    },
+                    "citation": {
+                      "type": "string"
+                    },
+                    "licence": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "ref"
+                  ],
+                  "additionalProperties": false
+                },
+                "default": []
+              },
+              "toolkit_link": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "toc",
+              "result",
+              "status",
+              "title_template",
+              "support"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "modules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_:\\-./]*$"
+              },
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "consent",
+                  "identification",
+                  "disaggregation",
+                  "indicator",
+                  "satisfaction",
+                  "feedback",
+                  "custom"
+                ]
+              },
+              "title": {
+                "$ref": "#/definitions/BankPackage/properties/indicators/items/properties/guides/items/properties/questions/items/properties/label"
+              },
+              "intro": {
+                "$ref": "#/definitions/BankPackage/properties/indicators/items/properties/guides/items/properties/questions/items/properties/label"
+              },
+              "respondent": {
+                "$ref": "#/definitions/BankPackage/properties/indicators/items/properties/respondents/items"
+              },
+              "mode": {
+                "type": "string",
+                "enum": [
+                  "interview",
+                  "observation",
+                  "kii",
+                  "fgd",
+                  "measurement"
+                ]
+              },
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "item_id": {
+                      "type": "string",
+                      "pattern": "^[a-z][a-z0-9_]*$"
+                    },
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "note",
+                        "text",
+                        "integer",
+                        "decimal",
+                        "date",
+                        "select_one",
+                        "select_multiple",
+                        "geopoint",
+                        "image",
+                        "calculate",
+                        "repeat_group"
+                      ]
+                    },
+                    "list": {
+                      "type": "string"
+                    },
+                    "label": {
+                      "$ref": "#/definitions/BankPackage/properties/indicators/items/properties/guides/items/properties/questions/items/properties/label"
+                    },
+                    "hint": {
+                      "$ref": "#/definitions/BankPackage/properties/indicators/items/properties/guides/items/properties/questions/items/properties/label"
+                    },
+                    "construct": {
+                      "type": "string"
+                    },
+                    "dimension": {
+                      "type": "string"
+                    },
+                    "respondent": {
+                      "$ref": "#/definitions/BankPackage/properties/indicators/items/properties/respondents/items"
+                    },
+                    "mode": {
+                      "$ref": "#/definitions/BankPackage/properties/modules/items/properties/mode"
+                    },
+                    "core": {
+                      "type": "boolean",
+                      "default": false
+                    },
+                    "lock": {
+                      "type": "string",
+                      "enum": [
+                        "locked",
+                        "options_adaptable",
+                        "free"
+                      ],
+                      "default": "locked"
+                    },
+                    "visibility": {
+                      "type": "string",
+                      "enum": [
+                        "respondent",
+                        "enumerator"
+                      ],
+                      "default": "respondent"
+                    },
+                    "relevant": {
+                      "type": "object",
+                      "properties": {
+                        "ref": {
+                          "type": "string"
+                        },
+                        "op": {
+                          "type": "string",
+                          "enum": [
+                            "=",
+                            "!=",
+                            "in",
+                            "not_in",
+                            "selected"
+                          ]
+                        },
+                        "values": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "minItems": 1
+                        }
+                      },
+                      "required": [
+                        "ref",
+                        "op",
+                        "values"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "relevant_note": {
+                      "type": "string"
+                    },
+                    "required": {
+                      "type": "boolean"
+                    },
+                    "flag_values": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "threshold_param": {
+                      "type": "string"
+                    },
+                    "source": {
+                      "$ref": "#/definitions/BankPackage/properties/indicators/items/properties/sources/items"
+                    },
+                    "approved_languages": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "pattern": "^[a-z]{2,3}(-[A-Za-z]{2,4})?$"
+                      }
+                    },
+                    "repeat_over_param": {
+                      "type": "string"
+                    },
+                    "sub_items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/BankPackage/properties/modules/items/properties/items/items"
+                      }
+                    }
+                  },
+                  "required": [
+                    "item_id",
+                    "type",
+                    "label",
+                    "respondent",
+                    "mode"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "minutes_per_item": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "id",
+              "kind",
+              "title",
+              "respondent",
+              "mode",
+              "items"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "choice_lists": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "options": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_\\-.]+$"
+                    },
+                    "label": {
+                      "$ref": "#/definitions/BankPackage/properties/indicators/items/properties/guides/items/properties/questions/items/properties/label"
+                    },
+                    "counts": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "label"
+                  ],
+                  "additionalProperties": false
+                },
+                "minItems": 1
+              },
+              "from_parameter": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "options"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "activities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_]*$"
+              },
+              "label": {
+                "type": "string"
+              },
+              "toc": {
+                "type": "string"
+              },
+              "area_of_work": {
+                "type": "string"
+              },
+              "modalities": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/BankPackage/properties/indicators/items/properties/modality"
+                },
+                "default": [
+                  "any"
+                ]
+              },
+              "anchors": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/BankPackage/properties/indicators/items/properties/timing/properties/anchor"
+                },
+                "default": [
+                  "activity_end"
+                ]
+              },
+              "respondents": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/BankPackage/properties/indicators/items/properties/respondents/items"
+                },
+                "default": []
+              },
+              "unit": {
+                "type": "string",
+                "enum": [
+                  "household",
+                  "individual",
+                  "facility",
+                  "site",
+                  "session"
+                ],
+                "default": "household"
+              },
+              "results": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "default": []
+              },
+              "asks": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "modality",
+                    "rounds",
+                    "timing",
+                    "population",
+                    "location",
+                    "units"
+                  ]
+                },
+                "default": [
+                  "timing",
+                  "population",
+                  "location"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "label",
+              "toc"
+            ],
+            "additionalProperties": false
+          },
+          "default": []
+        },
+        "glossary": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "term": {
+                "type": "string"
+              },
+              "translations": {
+                "type": "object",
+                "properties": {
+                  "en": {
+                    "$ref": "#/definitions/BankPackage/properties/indicators/items/properties/guides/items/properties/questions/items/properties/label/properties/en"
+                  }
+                },
+                "additionalProperties": {
+                  "$ref": "#/definitions/BankPackage/properties/indicators/items/properties/guides/items/properties/questions/items/properties/label/additionalProperties"
+                }
+              },
+              "note": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "term"
+            ],
+            "additionalProperties": false
+          },
+          "default": []
+        }
+      },
+      "required": [
+        "schema_version",
+        "package_id",
+        "competency",
+        "version",
+        "tocs",
+        "results",
+        "indicators",
+        "modules",
+        "choice_lists"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}
