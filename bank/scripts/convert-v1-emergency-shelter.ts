@@ -29,7 +29,8 @@ interface V1Indicator {
 }
 interface V1 { toc: { id: string; name: string; version: string; source_toolkit: string; note: string }; global_rules: Record<string, string>; indicators: V1Indicator[] }
 
-const v1: V1 = JSON.parse(readFileSync(SRC, 'utf8').replace(/^﻿/, '')) // v1 file carries a UTF-8 BOM
+const rawText = readFileSync(SRC, 'utf8')
+const v1: V1 = JSON.parse(rawText.charCodeAt(0) === 0xfeff ? rawText.slice(1) : rawText) // v1 file carries a UTF-8 BOM
 
 // ---------- Adviser decisions encoded here ----------
 const SOURCE_REF = 'NRC S&S outcome monitoring toolkits – Emergency Shelter (2026)'
