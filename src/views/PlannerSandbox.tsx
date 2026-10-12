@@ -48,7 +48,7 @@ export function PlannerSandbox({ bank }: { bank: Bank }) {
     <div>
       <h1 className="text-xl font-bold">Visits (sandbox)</h1>
       <p className="mb-4 text-stone-500">Type activity timings as you would say them. The planner derives the windows from the indicators' timing rules and groups items into events.</p>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
         <section className="card">
           <h2 className="mb-2 font-semibold">Activities</h2>
           {rows.map((r, i) => {

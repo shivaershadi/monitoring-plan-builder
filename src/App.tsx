@@ -16,8 +16,8 @@ export default function App() {
   const indicatorCount = bank.packages.reduce((n, p) => n + p.indicators.length, 0)
 
   return (
-    <div className="grid min-h-screen grid-cols-[220px_1fr]">
-      <aside className="sticky top-0 h-screen border-r border-stone-200 bg-white p-3">
+    <div className="grid min-h-screen grid-cols-1 md:grid-cols-[220px_1fr]">
+      <aside className="border-b border-stone-200 bg-white p-3 md:sticky md:top-0 md:h-screen md:border-b-0 md:border-r">
         <div className="mb-4 flex items-center gap-2 px-2">
           <div className="grid h-8 w-8 place-items-center rounded-md bg-nrc font-extrabold text-white">N</div>
           <div>
