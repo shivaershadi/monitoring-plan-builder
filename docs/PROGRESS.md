@@ -34,6 +34,9 @@ Running record of what is built, what the product owner tested, and what is next
   The deploy job runs without a dependency cache, as the setup-node v7 documentation recommends for workflows with write permissions. Both workflows check out without persisting the token.
 - Local checks on Node 24.20 and npm 11.19: lint clean; 17 tests in 4 files pass; bank `ss-emergency-shelter.json` 0 errors, 0 warnings; build produces one HTML, one CSS (10.5 kB) and one JS file (304 kB); the no-AI guard finds nothing.
 
+- First push of `main` on 2026-10-29 (commit `e3757ce`). On GitHub: CI run 1 passed on Node 24; deploy run 1 built and tested, then stopped at `configure-pages` because Pages was not yet enabled (expected). Dependabot ran at once and opened pull requests #1 to #5 (typescript-eslint, plugin-react, postcss, zod 4, vitest 5); they are left open for the Phase 1 toolchain upgrade.
+- Pages source set to GitHub Actions by the product owner. This commit is the first push after that, and is the acceptance test that a push to `main` reaches the live site.
+
 ### Known items carried into Phase 1
 
 - `npm audit` reports advisories in the development toolchain (vite 5 dev server, vitest 2 and its tinypool and mocker dependencies, esbuild 0.21 under vite) and in zod 3 (memory exhaustion on oversized constrained collections, fixed in zod 4.6.6). None of the vite or vitest code ships in the site; zod does. The fixes are major upgrades (vite 8, vitest 5, zod 4), so they are planned as the first commit of Phase 1, before the project-document schema is written in zod. The non-breaking fix (`postcss-selector-parser`) is applied.
@@ -41,11 +44,10 @@ Running record of what is built, what the product owner tested, and what is next
 
 ### Tested by the product owner
 
-Nothing yet.
+- Completed the Git Credential Manager sign-in for the first push.
+- Set Settings, Pages, Source to GitHub Actions.
 
 ### Next
 
-1. First push to GitHub (the product owner completes the sign-in window).
-2. Settings, Pages, Source: GitHub Actions (product owner).
-3. Both workflows green; live site shows Bank v2026.10.0, 1 package, 12 indicators.
-4. Branch ruleset on `main` requiring the CI `check` job; Issues on (product owner).
+1. Both workflows green on this push; live site shows Bank v2026.10.0, 1 package, 12 indicators.
+2. Branch ruleset on `main` requiring the CI `check` job; Issues on (product owner).
