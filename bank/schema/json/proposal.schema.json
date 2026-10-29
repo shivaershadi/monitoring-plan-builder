@@ -1,307 +1,335 @@
 {
-  "$ref": "#/definitions/Proposal",
-  "definitions": {
-    "Proposal": {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "indicator_id": {
+      "type": "string"
+    },
+    "requested_by": {
+      "type": "string"
+    },
+    "requested_on": {
+      "type": "string"
+    },
+    "sources_allowed": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "requested",
+        "drafted",
+        "in_review",
+        "approved",
+        "rejected"
+      ]
+    },
+    "draft_modules": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_:\\-./]*$"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "consent",
+              "identification",
+              "disaggregation",
+              "indicator",
+              "satisfaction",
+              "feedback",
+              "custom"
+            ]
+          },
+          "title": {
+            "type": "object",
+            "properties": {
+              "en": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "en"
+            ],
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "intro": {
+            "type": "object",
+            "properties": {
+              "en": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "en"
+            ],
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "respondent": {
+            "type": "string",
+            "minLength": 1
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "interview",
+              "observation",
+              "kii",
+              "fgd",
+              "measurement"
+            ]
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/__schema0"
+            }
+          },
+          "minutes_per_item": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "title",
+          "respondent",
+          "mode",
+          "items"
+        ]
+      }
+    },
+    "decisions": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "by": {
+            "type": "string"
+          },
+          "on": {
+            "type": "string"
+          },
+          "decision": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "by",
+          "on",
+          "decision"
+        ]
+      }
+    }
+  },
+  "required": [
+    "id",
+    "indicator_id",
+    "requested_on",
+    "sources_allowed",
+    "status"
+  ],
+  "$defs": {
+    "__schema0": {
       "type": "object",
       "properties": {
-        "id": {
+        "item_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "note",
+            "text",
+            "integer",
+            "decimal",
+            "date",
+            "select_one",
+            "select_multiple",
+            "geopoint",
+            "image",
+            "calculate",
+            "repeat_group"
+          ]
+        },
+        "list": {
           "type": "string"
         },
-        "indicator_id": {
+        "label": {
+          "type": "object",
+          "properties": {
+            "en": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "en"
+          ],
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "hint": {
+          "type": "object",
+          "properties": {
+            "en": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "en"
+          ],
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "construct": {
           "type": "string"
         },
-        "requested_by": {
+        "dimension": {
           "type": "string"
         },
-        "requested_on": {
+        "respondent": {
+          "type": "string",
+          "minLength": 1
+        },
+        "mode": {
+          "type": "string",
+          "enum": [
+            "interview",
+            "observation",
+            "kii",
+            "fgd",
+            "measurement"
+          ]
+        },
+        "core": {
+          "default": false,
+          "type": "boolean"
+        },
+        "lock": {
+          "default": "locked",
+          "type": "string",
+          "enum": [
+            "locked",
+            "options_adaptable",
+            "free"
+          ]
+        },
+        "visibility": {
+          "default": "respondent",
+          "type": "string",
+          "enum": [
+            "respondent",
+            "enumerator"
+          ]
+        },
+        "relevant": {
+          "type": "object",
+          "properties": {
+            "ref": {
+              "type": "string"
+            },
+            "op": {
+              "type": "string",
+              "enum": [
+                "=",
+                "!=",
+                "in",
+                "not_in",
+                "selected"
+              ]
+            },
+            "values": {
+              "minItems": 1,
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "ref",
+            "op",
+            "values"
+          ]
+        },
+        "relevant_note": {
           "type": "string"
         },
-        "sources_allowed": {
+        "required": {
+          "type": "boolean"
+        },
+        "flag_values": {
           "type": "array",
           "items": {
             "type": "string"
           }
         },
-        "status": {
-          "type": "string",
-          "enum": [
-            "requested",
-            "drafted",
-            "in_review",
-            "approved",
-            "rejected"
+        "threshold_param": {
+          "type": "string"
+        },
+        "source": {
+          "type": "object",
+          "properties": {
+            "ref": {
+              "type": "string"
+            },
+            "citation": {
+              "type": "string"
+            },
+            "licence": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "ref"
           ]
         },
-        "draft_modules": {
+        "approved_languages": {
           "type": "array",
           "items": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "string",
-                "pattern": "^[a-z][a-z0-9_:\\-./]*$"
-              },
-              "kind": {
-                "type": "string",
-                "enum": [
-                  "consent",
-                  "identification",
-                  "disaggregation",
-                  "indicator",
-                  "satisfaction",
-                  "feedback",
-                  "custom"
-                ]
-              },
-              "title": {
-                "type": "object",
-                "properties": {
-                  "en": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "en"
-                ],
-                "additionalProperties": {
-                  "anyOf": [
-                    {
-                      "not": {}
-                    },
-                    {
-                      "type": "string"
-                    }
-                  ]
-                }
-              },
-              "intro": {
-                "$ref": "#/definitions/Proposal/properties/draft_modules/items/properties/title"
-              },
-              "respondent": {
-                "type": "string",
-                "minLength": 1
-              },
-              "mode": {
-                "type": "string",
-                "enum": [
-                  "interview",
-                  "observation",
-                  "kii",
-                  "fgd",
-                  "measurement"
-                ]
-              },
-              "items": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "item_id": {
-                      "type": "string",
-                      "pattern": "^[a-z][a-z0-9_]*$"
-                    },
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "note",
-                        "text",
-                        "integer",
-                        "decimal",
-                        "date",
-                        "select_one",
-                        "select_multiple",
-                        "geopoint",
-                        "image",
-                        "calculate",
-                        "repeat_group"
-                      ]
-                    },
-                    "list": {
-                      "type": "string"
-                    },
-                    "label": {
-                      "$ref": "#/definitions/Proposal/properties/draft_modules/items/properties/title"
-                    },
-                    "hint": {
-                      "$ref": "#/definitions/Proposal/properties/draft_modules/items/properties/title"
-                    },
-                    "construct": {
-                      "type": "string"
-                    },
-                    "dimension": {
-                      "type": "string"
-                    },
-                    "respondent": {
-                      "$ref": "#/definitions/Proposal/properties/draft_modules/items/properties/respondent"
-                    },
-                    "mode": {
-                      "$ref": "#/definitions/Proposal/properties/draft_modules/items/properties/mode"
-                    },
-                    "core": {
-                      "type": "boolean",
-                      "default": false
-                    },
-                    "lock": {
-                      "type": "string",
-                      "enum": [
-                        "locked",
-                        "options_adaptable",
-                        "free"
-                      ],
-                      "default": "locked"
-                    },
-                    "visibility": {
-                      "type": "string",
-                      "enum": [
-                        "respondent",
-                        "enumerator"
-                      ],
-                      "default": "respondent"
-                    },
-                    "relevant": {
-                      "type": "object",
-                      "properties": {
-                        "ref": {
-                          "type": "string"
-                        },
-                        "op": {
-                          "type": "string",
-                          "enum": [
-                            "=",
-                            "!=",
-                            "in",
-                            "not_in",
-                            "selected"
-                          ]
-                        },
-                        "values": {
-                          "type": "array",
-                          "items": {
-                            "type": "string"
-                          },
-                          "minItems": 1
-                        }
-                      },
-                      "required": [
-                        "ref",
-                        "op",
-                        "values"
-                      ],
-                      "additionalProperties": false
-                    },
-                    "relevant_note": {
-                      "type": "string"
-                    },
-                    "required": {
-                      "type": "boolean"
-                    },
-                    "flag_values": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      }
-                    },
-                    "threshold_param": {
-                      "type": "string"
-                    },
-                    "source": {
-                      "type": "object",
-                      "properties": {
-                        "ref": {
-                          "type": "string"
-                        },
-                        "citation": {
-                          "type": "string"
-                        },
-                        "licence": {
-                          "type": "string"
-                        }
-                      },
-                      "required": [
-                        "ref"
-                      ],
-                      "additionalProperties": false
-                    },
-                    "approved_languages": {
-                      "type": "array",
-                      "items": {
-                        "type": "string",
-                        "pattern": "^[a-z]{2,3}(-[A-Za-z]{2,4})?$"
-                      }
-                    },
-                    "repeat_over_param": {
-                      "type": "string"
-                    },
-                    "sub_items": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/definitions/Proposal/properties/draft_modules/items/properties/items/items"
-                      }
-                    }
-                  },
-                  "required": [
-                    "item_id",
-                    "type",
-                    "label",
-                    "respondent",
-                    "mode"
-                  ],
-                  "additionalProperties": false
-                }
-              },
-              "minutes_per_item": {
-                "type": "number"
-              }
-            },
-            "required": [
-              "id",
-              "kind",
-              "title",
-              "respondent",
-              "mode",
-              "items"
-            ],
-            "additionalProperties": false
-          },
-          "default": []
+            "type": "string",
+            "pattern": "^[a-z]{2,3}(-[A-Za-z]{2,4})?$"
+          }
         },
-        "decisions": {
+        "repeat_over_param": {
+          "type": "string"
+        },
+        "sub_items": {
           "type": "array",
           "items": {
-            "type": "object",
-            "properties": {
-              "by": {
-                "type": "string"
-              },
-              "on": {
-                "type": "string"
-              },
-              "decision": {
-                "type": "string"
-              },
-              "note": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "by",
-              "on",
-              "decision"
-            ],
-            "additionalProperties": false
-          },
-          "default": []
+            "$ref": "#/$defs/__schema0"
+          }
         }
       },
       "required": [
-        "id",
-        "indicator_id",
-        "requested_on",
-        "sources_allowed",
-        "status"
-      ],
-      "additionalProperties": false
+        "item_id",
+        "type",
+        "label",
+        "respondent",
+        "mode"
+      ]
     }
-  },
-  "$schema": "http://json-schema.org/draft-07/schema#"
+  }
 }

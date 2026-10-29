@@ -2,14 +2,16 @@
 import { writeFileSync, mkdirSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { zodToJsonSchema } from 'zod-to-json-schema'
+import { z } from 'zod'
 import { BankPackage, BankRelease, Proposal } from '../schema/bank'
 
 const here = dirname(fileURLToPath(import.meta.url))
 const out = resolve(here, '../schema/json')
 mkdirSync(out, { recursive: true })
-const write = (name: string, schema: unknown) => writeFileSync(resolve(out, name), JSON.stringify(schema, null, 2) + '\n', 'utf8')
-write('bank-package.schema.json', zodToJsonSchema(BankPackage, { name: 'BankPackage' }))
-write('bank-release.schema.json', zodToJsonSchema(BankRelease, { name: 'BankRelease' }))
-write('proposal.schema.json', zodToJsonSchema(Proposal, { name: 'Proposal' }))
+const write = (name: string, schema: z.ZodType) =>
+  // io 'input': bank files are inputs, so fields with defaults stay optional in the emitted schema.
+  writeFileSync(resolve(out, name), JSON.stringify(z.toJSONSchema(schema, { io: 'input' }), null, 2) + '\n', 'utf8')
+write('bank-package.schema.json', BankPackage)
+write('bank-release.schema.json', BankRelease)
+write('proposal.schema.json', Proposal)
 console.log(`Wrote JSON schemas to ${out}`)

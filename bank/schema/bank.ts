@@ -189,7 +189,7 @@ export const ItemBase = z.object({
 
 export type Item = z.output<typeof ItemBase> & { sub_items?: Item[]; repeat_over_param?: string }
 export type ItemInput = z.input<typeof ItemBase> & { sub_items?: ItemInput[]; repeat_over_param?: string }
-export const Item: z.ZodType<Item, z.ZodTypeDef, ItemInput> = ItemBase.extend({
+export const Item: z.ZodType<Item, ItemInput> = ItemBase.extend({
   /** For repeat_group: the CO parameter whose list drives one block per entry. */
   repeat_over_param: z.string().optional(),
   sub_items: z.lazy(() => z.array(Item)).optional(),
@@ -306,7 +306,7 @@ export const BankPackage = z.object({
   competency: z.object({ id: CompetencyId, name: z.string() }),
   version: z.string(),
   generated_from: z.string().optional(),
-  global_rules: z.record(z.string()).default({}),
+  global_rules: z.record(z.string(), z.string()).default({}),
   tocs: z.array(Toc),
   results: z.array(Result),
   indicators: z.array(Indicator),
