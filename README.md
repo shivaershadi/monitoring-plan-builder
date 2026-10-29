@@ -48,6 +48,8 @@ npm run build
 
 Every push to `main` runs `.github/workflows/deploy.yml`, which tests, validates and builds the site and publishes `dist/` to GitHub Pages. `.github/workflows/ci.yml` runs the same checks plus the no-AI and no-network guard on every push and pull request. Dependabot proposes npm and Actions updates monthly.
 
+`main` is protected by a ruleset: the CI job `check` must pass on a commit before `main` accepts it, and force pushes and deletion are blocked. Push changes to a branch, let CI pass, then fast-forward `main` or merge a pull request.
+
 To publish a new bank release, commit the package, bump `bank/releases/current.json`, and push; the pipeline validates and ships it.
 
 ## Layout
