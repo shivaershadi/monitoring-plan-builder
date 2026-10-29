@@ -95,3 +95,20 @@ export function lastProjectId(): string | null {
     return null
   }
 }
+
+/** The screen to return to after a reload. Same convenience-only rule. */
+const SCREEN_KEY = 'mpb.lastScreen'
+export function rememberScreen(screen: string): void {
+  try {
+    localStorage.setItem(SCREEN_KEY, screen)
+  } catch {
+    /* ignore */
+  }
+}
+export function lastScreen(): string | null {
+  try {
+    return localStorage.getItem(SCREEN_KEY)
+  } catch {
+    return null
+  }
+}

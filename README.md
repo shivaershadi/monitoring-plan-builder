@@ -15,18 +15,22 @@ CI enforces the first and last points: the build fails if `src`, `bank`, `index.
 
 ## Status
 
-Phase 0 (repository, hosting, pipeline). The seed is the phase 0 foundations of the earlier AI-hybrid design, with the AI proxy removed:
+Phases 0 (repository, hosting, pipeline) and 1 (Plan) are built. What the app does today:
 
-- **Bank schema v2** (`bank/schema/bank.ts`, zod) with cross-reference validation and emitted JSON Schemas.
-- **Emergency Shelter package** (`bank/packages/ss-emergency-shelter.json`, release 2026.10.0): 5 mandatory indicators supported, 7 suggested indicators listed as not yet supported, 6 standard activities.
-- **Engines** with unit tests: timing parser, sampling, visit planner, XLSForm lint.
-- **App shell** (React, Vite, Tailwind): Bank view and a Visits sandbox.
+- **Home:** two ways in (describe the intervention, or start from the logframe), recent projects on this device, project file import and export.
+- **Intervention:** country, area and languages; activity cards from the bank's catalogue, found by browsing or by typing the activity in your own words (matched against the bank's synonym list); timing typed as you would say it, with "We understood" and a calendar fallback; modality, rounds, people reached, units, location.
+- **Indicators:** mandatory indicators that apply are ticked and locked (removal needs a note); suggested ones are optional; the in-kind or CVA version follows the activity's modality; indicators without approved content are shown with "Request content"; logframe import by paste or Excel upload, matched by indicator ID, GORS UID or title.
+- **Visits:** visits proposed from each indicator's respondent, method and timing rule, on a month timeline; merge, split, move and drop, kept across re-planning and undoable; sample size per visit with confidence, margin and strata; warnings for uncovered indicators, visits outside an indicator's window, missing populations and long interviews.
+- **Bank:** the Emergency Shelter package (release 2026.10.1): 5 mandatory indicators supported, 7 suggested listed as not yet supported, 6 standard activities, and the country table with 17 languages.
+- **Modes:** Builder edits the plan; Reviewer sees it read-only.
+
+Every project autosaves in the browser (IndexedDB) and reopens after a reload. Phases 2 to 5 (Build, Review, Adviser, Pilot) and what has been tested are tracked in [`docs/PROGRESS.md`](docs/PROGRESS.md).
 
 Phases 1 to 5 (Plan, Build, Review, Adviser, Pilot) and what has been tested are tracked in [`docs/PROGRESS.md`](docs/PROGRESS.md).
 
 ## Run locally
 
-Needs Node 22 or later (CI uses Node 24).
+Needs Node 22.12 or later (CI uses Node 24).
 
 ```bash
 npm install
@@ -59,13 +63,19 @@ bank/
   schema/bank.ts            zod schema v2 + validateBankPackage()
   schema/json/              emitted JSON Schemas
   source/                   v1 inputs (prototype content, country tables)
-  scripts/                  convert, validate, emit-schema
-  packages/                 v2 packages (generated or authored)
+  scripts/                  convert, build-countries, validate, emit-schema
+  packages/                 v2 packages and countries.json (generated or authored)
   releases/current.json     release manifest
 src/
-  engine/                   pure TypeScript engines + tests
+  engine/                   pure TypeScript engines + tests: timing, sampling, planner,
+                            visits (merge/split/drop/move), selection (indicator board),
+                            logframe and activity matching, XLSForm lint
+  project/                  project document schema, reducer, IndexedDB store, file
+                            import/export, board and plan derivation + tests
+  state/useProject.ts       open project, autosave, reopen after reload
   bank/loader.ts            loads the bundled release
-  views/                    Bank view, Visits sandbox
+  views/                    Home, Intervention, Indicators, Visits, Bank
+  ui/format.ts              date and text helpers for display
 docs/
   PROGRESS.md               what is done, what was tested, what is next
   BUILD_INSTRUCTION_v2.md   screen-by-screen spec inherited from the AI-hybrid design (reference)
