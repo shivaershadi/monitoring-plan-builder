@@ -14,12 +14,12 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "noEmit": true,
-    "types": ["vite/client", "node", "@cloudflare/workers-types"],
+    "types": ["vite/client", "node"],
     "baseUrl": ".",
     "paths": {
       "@engine/*": ["src/engine/*"],
       "@bank/*": ["bank/*"]
     }
   },
-  "include": ["src", "bank/schema", "bank/scripts", "proxy/src", "vite.config.ts"]
+  "include": ["src", "bank/schema", "bank/scripts", "vite.config.ts"]
 }

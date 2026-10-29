@@ -1,16 +1,19 @@
 {
-  "name": "outcome-monitoring-studio",
+  "name": "monitoring-plan-builder",
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "NRC Outcome Monitoring Studio: monitoring-plan builder (Product 2). Phase 0 foundations.",
+  "description": "NRC Monitoring Plan Builder: monitoring-plan builder with no language model, static site on GitHub Pages (Product 3).",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "lint": "eslint src bank/scripts proxy/src --ext .ts,.tsx",
+    "lint": "eslint src bank/scripts --ext .ts,.tsx",
     "bank:convert": "tsx bank/scripts/convert-v1-emergency-shelter.ts",
     "bank:validate": "tsx bank/scripts/validate-bank.ts",
     "bank:schema": "tsx bank/scripts/emit-json-schema.ts"
@@ -21,7 +24,6 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^5.20261012.1",
     "@types/node": "^26.6.5",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",

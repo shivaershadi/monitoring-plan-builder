@@ -1,5 +1,7 @@
 # Build instruction v2 — Outcome Monitoring Studio
 
+> **Kept for reference.** This is the build instruction of Product 2, the AI-hybrid design this repository was seeded from. The Monitoring Plan Builder (Product 3) follows its screens and data model with every AI assist removed: phase 3 is "Review" (manual edit, translation memory, review pack) instead of "Assist", the proposal queue is a human authoring queue, and there is no AI client, proxy or key. Non-negotiable 5 below is replaced by: no model, no secret and no network call outside `src/integrations/`. See `README.md` and `docs/PROGRESS.md` for the current plan and state.
+
 Read first: `README.md` (what exists), then the concept `../ES Monitoring Tool (Claude Code)/docs/Product 2 - New app concept and design (2026-10-12).md` (why), then the mockup `.../docs/Product 2 - UI mockup.html` (how it should look). This file turns the concept into build phases with acceptance criteria. Phase 0 is done.
 
 ## Non-negotiables

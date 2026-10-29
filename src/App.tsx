@@ -21,7 +21,7 @@ export default function App() {
         <div className="mb-4 flex items-center gap-2 px-2">
           <div className="grid h-8 w-8 place-items-center rounded-md bg-nrc font-extrabold text-white">N</div>
           <div>
-            <div className="text-sm font-bold">Outcome Monitoring Studio</div>
+            <div className="text-sm font-bold">Monitoring Plan Builder</div>
             <div className="text-[11px] text-stone-500">
               Bank v{bank.release.version} · {bank.packages.length} package{bank.packages.length === 1 ? '' : 's'} · {indicatorCount} indicators
             </div>

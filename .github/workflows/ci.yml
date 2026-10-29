@@ -1,0 +1,30 @@
+name: CI
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+      - run: npm run bank:validate
+      - run: npm run build
+      - name: No model, no key, no network call in the app
+        run: |
+          if grep -rEin "anthropic|openai|claude|sk-ant[-]|VITE_[A-Z_]*KE[Y]" src bank index.html vite.config.ts; then
+            echo "AI or key reference found"; exit 1
+          fi
+          if grep -rEl "fetch\(|XMLHttpRequest|WebSocket|EventSource|sendBeacon" src bank | grep -v "^src/integrations/"; then
+            echo "network call outside src/integrations"; exit 1
+          fi
