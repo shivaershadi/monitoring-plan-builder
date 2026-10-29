@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "type": "number",
+      "const": 1
+    },
+    "version": {
+      "type": "string"
+    },
+    "note": {
+      "type": "string"
+    },
+    "default_language": {
+      "type": "string",
+      "pattern": "^[a-z]{2,3}(-[A-Za-z]{2,4})?$"
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "pattern": "^[a-z]{2,3}(-[A-Za-z]{2,4})?$"
+          },
+          "name": {
+            "type": "string"
+          },
+          "rtl": {
+            "default": false,
+            "type": "boolean"
+          },
+          "note": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "name"
+        ]
+      }
+    },
+    "countries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "regions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "languages": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z]{2,3}(-[A-Za-z]{2,4})?$"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "regions",
+          "languages"
+        ]
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "version",
+    "default_language",
+    "languages",
+    "countries"
+  ]
+}

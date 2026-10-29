@@ -289,6 +289,8 @@ export const Activity = z.object({
   unit: z.enum(['household', 'individual', 'facility', 'site', 'session']).default('household'),
   results: z.array(z.string()).default([]), // result ids this activity can lead to
   asks: z.array(z.enum(['modality', 'rounds', 'timing', 'population', 'location', 'units'])).default(['timing', 'population', 'location']),
+  /** Plain-language phrases a country office might use for this activity; matched by token overlap, never by a model. */
+  synonyms: z.array(z.string()).default([]),
 })
 export type Activity = z.infer<typeof Activity>
 
@@ -322,9 +324,55 @@ export const BankRelease = z.object({
   date: z.string(),
   packages: z.array(z.object({ file: z.string(), competency: CompetencyId, package_version: z.string() })),
   shared_modules_file: z.string().optional(),
+  /** Country table: regions and suggested languages per country (see CountryTable). */
+  countries_file: z.string().optional(),
   changelog: z.array(z.string()).default([]),
 })
 export type BankRelease = z.infer<typeof BankRelease>
+
+// ---------- Countries and languages ----------
+
+export const Language = z.object({
+  code: LangCode,
+  name: z.string(),
+  rtl: z.boolean().default(false),
+  note: z.string().optional(),
+})
+export type Language = z.infer<typeof Language>
+
+export const Country = z.object({
+  name: z.string(),
+  regions: z.array(z.string()),
+  /** Suggested additional languages (codes); English is always included and comes first. */
+  languages: z.array(LangCode),
+})
+export type Country = z.infer<typeof Country>
+
+export const CountryTable = z.object({
+  schema_version: z.literal(1),
+  version: z.string(),
+  note: z.string().optional(),
+  default_language: LangCode,
+  languages: z.array(Language),
+  countries: z.array(Country),
+})
+export type CountryTable = z.infer<typeof CountryTable>
+
+export function validateCountryTable(input: unknown): { ok: boolean; table?: CountryTable; issues: BankIssue[] } {
+  const parsed = CountryTable.safeParse(input)
+  if (!parsed.success) return { ok: false, issues: parsed.error.issues.map((e) => ({ level: 'error' as const, where: e.path.join('.'), message: e.message })) }
+  const table = parsed.data
+  const issues: BankIssue[] = []
+  const codes = new Set(table.languages.map((l) => l.code))
+  if (!codes.has(table.default_language)) issues.push({ level: 'error', where: 'default_language', message: `${table.default_language} is not in languages` })
+  const seen = new Set<string>()
+  for (const c of table.countries) {
+    if (seen.has(c.name)) issues.push({ level: 'error', where: `countries.${c.name}`, message: 'duplicate country' })
+    seen.add(c.name)
+    for (const l of c.languages) if (!codes.has(l)) issues.push({ level: 'error', where: `countries.${c.name}`, message: `unknown language ${l}` })
+  }
+  return { ok: !issues.some((i) => i.level === 'error'), table, issues }
+}
 
 // ---------- Proposals (indicators without a toolkit) ----------
 

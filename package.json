@@ -16,11 +16,13 @@
     "lint": "eslint src bank/scripts --ext .ts,.tsx",
     "bank:convert": "tsx bank/scripts/convert-v1-emergency-shelter.ts",
     "bank:validate": "tsx bank/scripts/validate-bank.ts",
-    "bank:schema": "tsx bank/scripts/emit-json-schema.ts"
+    "bank:schema": "tsx bank/scripts/emit-json-schema.ts",
+    "bank:countries": "tsx bank/scripts/build-countries.ts"
   },
   "dependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz",
     "zod": "^4.6.7"
   },
   "devDependencies": {
@@ -32,6 +34,7 @@
     "@vitejs/plugin-react": "^6.1.2",
     "autoprefixer": "^10.4.20",
     "eslint": "^8.57.1",
+    "fake-indexeddb": "^6.2.6",
     "postcss": "^8.5.32",
     "tailwindcss": "^3.4.17",
     "tsx": "^4.19.2",

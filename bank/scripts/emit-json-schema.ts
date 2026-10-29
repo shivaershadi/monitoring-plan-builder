@@ -3,7 +3,7 @@ import { writeFileSync, mkdirSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { z } from 'zod'
-import { BankPackage, BankRelease, Proposal } from '../schema/bank'
+import { BankPackage, BankRelease, CountryTable, Proposal } from '../schema/bank'
 
 const here = dirname(fileURLToPath(import.meta.url))
 const out = resolve(here, '../schema/json')
@@ -14,4 +14,5 @@ const write = (name: string, schema: z.ZodType) =>
 write('bank-package.schema.json', BankPackage)
 write('bank-release.schema.json', BankRelease)
 write('proposal.schema.json', Proposal)
+write('countries.schema.json', CountryTable)
 console.log(`Wrote JSON schemas to ${out}`)

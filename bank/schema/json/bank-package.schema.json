@@ -857,6 +857,13 @@
                 "units"
               ]
             }
+          },
+          "synonyms": {
+            "default": [],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         },
         "required": [

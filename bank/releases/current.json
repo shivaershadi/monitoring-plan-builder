@@ -1,10 +1,12 @@
 {
-  "version": "2026.10.0",
-  "date": "2026-10-12",
+  "version": "2026.10.1",
+  "date": "2026-10-29",
   "packages": [
-    { "file": "packages/ss-emergency-shelter.json", "competency": "ss", "package_version": "2026.10.0" }
+    { "file": "packages/ss-emergency-shelter.json", "competency": "ss", "package_version": "2026.10.1" }
   ],
+  "countries_file": "packages/countries.json",
   "changelog": [
+    "2026.10.1: activity synonyms for the free-text activity matcher (drafted, to be confirmed by an S&S adviser); country table moved into the bank with ISO language codes and right-to-left flags.",
     "2026.10.0: first v2 release; Emergency Shelter converted from the prototype content layer (5 mandatory indicators supported, 7 suggested listed as not yet supported)."
   ]
 }

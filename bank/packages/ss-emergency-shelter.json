@@ -5,7 +5,7 @@
     "id": "ss",
     "name": "Shelter & Settlements"
   },
-  "version": "2026.10.0",
+  "version": "2026.10.1",
   "generated_from": "emergency_shelter.v1.json (prototype content layer) via convert-v1-emergency-shelter.ts",
   "global_rules": {
     "reporting": "Report in GORS for each corresponding project. GORS must be filled within two weeks of data collection, and no later than the 15th of the month following data collection.",
@@ -2881,6 +2881,22 @@
         "timing",
         "population",
         "location"
+      ],
+      "synonyms": [
+        "NFI distribution",
+        "non-food items",
+        "household items",
+        "NFI kits",
+        "household kits",
+        "core relief items",
+        "kitchen sets",
+        "cooking sets",
+        "blankets",
+        "sleeping mats",
+        "mattresses",
+        "jerrycans",
+        "cash for NFIs",
+        "NFI vouchers"
       ]
     },
     {
@@ -2912,6 +2928,18 @@
         "population",
         "location",
         "units"
+      ],
+      "synonyms": [
+        "tents",
+        "family tents",
+        "emergency shelters",
+        "shelter units",
+        "refugee housing units",
+        "RHU",
+        "whole shelter",
+        "shelter provision",
+        "handover of shelters",
+        "cash for rent"
       ]
     },
     {
@@ -2941,6 +2969,20 @@
         "timing",
         "population",
         "location"
+      ],
+      "synonyms": [
+        "tarpaulins",
+        "plastic sheeting",
+        "shelter kits",
+        "emergency shelter kits",
+        "shelter materials",
+        "construction materials",
+        "timber and rope",
+        "tool kits",
+        "cash for shelter",
+        "shelter cash",
+        "technical supervision",
+        "shelter repair"
       ]
     },
     {
@@ -2966,6 +3008,14 @@
         "timing",
         "population",
         "location"
+      ],
+      "synonyms": [
+        "shelter training",
+        "construction training",
+        "build back safer",
+        "safer construction",
+        "trained on shelter",
+        "shelter awareness"
       ]
     },
     {
@@ -2990,6 +3040,13 @@
         "timing",
         "population",
         "location"
+      ],
+      "synonyms": [
+        "information sessions",
+        "shelter information",
+        "awareness sessions",
+        "community sessions",
+        "key messages"
       ]
     },
     {
@@ -3014,6 +3071,18 @@
         "timing",
         "population",
         "location"
+      ],
+      "synonyms": [
+        "fuel",
+        "firewood",
+        "cooking fuel",
+        "stoves",
+        "fuel-efficient stoves",
+        "cookstoves",
+        "briquettes",
+        "LPG",
+        "solar lamps",
+        "household energy"
       ]
     }
   ],

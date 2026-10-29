@@ -276,20 +276,27 @@ const results = [
 ]
 
 // Activity catalogue: Menu 1 of the S&S interactive indicator finder 2026 ("primary areas of work").
+// Synonyms are drafted for the deterministic free-text matcher (release 2026.10.1) and are to be confirmed by an S&S adviser.
 const activities: Activity[] = [
-  { id: 'es_nfi_distribution', label: 'Household NFI distribution (kits or CVA for household items)', toc: 'es', area_of_work: 'Household NFI distribution', modalities: ['in-kind', 'CVA'], anchors: ['distribution'], respondents: ['household'], unit: 'household', results: ['r_es_use_hh_items', 'r_es_hh_needs_met'], asks: ['modality', 'rounds', 'timing', 'population', 'location'] },
-  { id: 'es_whole_shelter', label: 'Emergency shelter provision (whole shelter solution)', toc: 'es', area_of_work: 'Emergency shelter provision', modalities: ['in-kind', 'CVA'], anchors: ['handover'], respondents: ['household', 'community_rep'], unit: 'household', results: ['r_es_use_of_shelter', 'r_es_sufficient', 'r_es_safe', 'r_es_retain'], asks: ['modality', 'timing', 'population', 'location', 'units'] },
-  { id: 'es_shelter_contribution', label: 'Material / cash / technical supervision contribution to emergency shelter', toc: 'es', area_of_work: 'Material/cash/technical supervision contribution', modalities: ['in-kind', 'CVA'], anchors: ['distribution'], respondents: ['household'], unit: 'household', results: ['r_es_use_shelter_support', 'r_es_sufficient', 'r_es_safe'], asks: ['modality', 'rounds', 'timing', 'population', 'location'] },
-  { id: 'es_training', label: 'Training and awareness-raising for temporary shelter', toc: 'es', area_of_work: 'Training & awareness-raising', modalities: ['any'], anchors: ['training_end'], respondents: ['individual'], unit: 'individual', results: ['r_es_knowledge', 'r_es_skill_applied'], asks: ['timing', 'population', 'location'] },
-  { id: 'es_information', label: 'Information sessions on emergency shelter topics', toc: 'es', area_of_work: 'Training & awareness-raising', modalities: ['any'], anchors: ['session_end'], respondents: ['individual'], unit: 'session', results: ['r_es_info_useful'], asks: ['timing', 'population', 'location'] },
-  { id: 'es_energy', label: 'Provision of safe household energy', toc: 'es', area_of_work: 'Provision of household energy supply', modalities: ['in-kind', 'CVA'], anchors: ['distribution'], respondents: ['household'], unit: 'household', results: [], asks: ['modality', 'timing', 'population', 'location'] },
+  { id: 'es_nfi_distribution', label: 'Household NFI distribution (kits or CVA for household items)', toc: 'es', area_of_work: 'Household NFI distribution', modalities: ['in-kind', 'CVA'], anchors: ['distribution'], respondents: ['household'], unit: 'household', results: ['r_es_use_hh_items', 'r_es_hh_needs_met'], asks: ['modality', 'rounds', 'timing', 'population', 'location'],
+    synonyms: ['NFI distribution', 'non-food items', 'household items', 'NFI kits', 'household kits', 'core relief items', 'kitchen sets', 'cooking sets', 'blankets', 'sleeping mats', 'mattresses', 'jerrycans', 'cash for NFIs', 'NFI vouchers'] },
+  { id: 'es_whole_shelter', label: 'Emergency shelter provision (whole shelter solution)', toc: 'es', area_of_work: 'Emergency shelter provision', modalities: ['in-kind', 'CVA'], anchors: ['handover'], respondents: ['household', 'community_rep'], unit: 'household', results: ['r_es_use_of_shelter', 'r_es_sufficient', 'r_es_safe', 'r_es_retain'], asks: ['modality', 'timing', 'population', 'location', 'units'],
+    synonyms: ['tents', 'family tents', 'emergency shelters', 'shelter units', 'refugee housing units', 'RHU', 'whole shelter', 'shelter provision', 'handover of shelters', 'cash for rent'] },
+  { id: 'es_shelter_contribution', label: 'Material / cash / technical supervision contribution to emergency shelter', toc: 'es', area_of_work: 'Material/cash/technical supervision contribution', modalities: ['in-kind', 'CVA'], anchors: ['distribution'], respondents: ['household'], unit: 'household', results: ['r_es_use_shelter_support', 'r_es_sufficient', 'r_es_safe'], asks: ['modality', 'rounds', 'timing', 'population', 'location'],
+    synonyms: ['tarpaulins', 'plastic sheeting', 'shelter kits', 'emergency shelter kits', 'shelter materials', 'construction materials', 'timber and rope', 'tool kits', 'cash for shelter', 'shelter cash', 'technical supervision', 'shelter repair'] },
+  { id: 'es_training', label: 'Training and awareness-raising for temporary shelter', toc: 'es', area_of_work: 'Training & awareness-raising', modalities: ['any'], anchors: ['training_end'], respondents: ['individual'], unit: 'individual', results: ['r_es_knowledge', 'r_es_skill_applied'], asks: ['timing', 'population', 'location'],
+    synonyms: ['shelter training', 'construction training', 'build back safer', 'safer construction', 'trained on shelter', 'shelter awareness'] },
+  { id: 'es_information', label: 'Information sessions on emergency shelter topics', toc: 'es', area_of_work: 'Training & awareness-raising', modalities: ['any'], anchors: ['session_end'], respondents: ['individual'], unit: 'session', results: ['r_es_info_useful'], asks: ['timing', 'population', 'location'],
+    synonyms: ['information sessions', 'shelter information', 'awareness sessions', 'community sessions', 'key messages'] },
+  { id: 'es_energy', label: 'Provision of safe household energy', toc: 'es', area_of_work: 'Provision of household energy supply', modalities: ['in-kind', 'CVA'], anchors: ['distribution'], respondents: ['household'], unit: 'household', results: [], asks: ['modality', 'timing', 'population', 'location'],
+    synonyms: ['fuel', 'firewood', 'cooking fuel', 'stoves', 'fuel-efficient stoves', 'cookstoves', 'briquettes', 'LPG', 'solar lamps', 'household energy'] },
 ]
 
 const pkg: BankPackage = {
   schema_version: 2,
   package_id: 'ss-emergency-shelter',
   competency: { id: 'ss', name: 'Shelter & Settlements' },
-  version: '2026.10.0',
+  version: '2026.10.1',
   generated_from: 'emergency_shelter.v1.json (prototype content layer) via convert-v1-emergency-shelter.ts',
   global_rules: v1.global_rules,
   tocs: [{ id: 'es', name: v1.toc.name, version: v1.toc.version, source_toolkit: v1.toc.source_toolkit, note: v1.toc.note }],
