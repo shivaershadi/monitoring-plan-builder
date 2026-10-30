@@ -242,7 +242,9 @@ function ActivityCard({ packages, activity: a, dispatch }: { packages: BankPacka
           {parsed && (
             <p className={`mt-1 text-xs ${parsed.kind === 'unresolved' ? 'text-amber-800' : 'text-green-800'}`}>
               {parsed.kind === 'unresolved' ? 'Not understood. Pick the dates below; your text is kept for display.' : `We understood: ${describeTiming(parsed)}.`}
-              {parsed.kind !== 'unresolved' && parsed.confidence === 'medium' && ' The year was assumed; check it.'}
+              {parsed.kind !== 'unresolved' &&
+                parsed.confidence === 'medium' &&
+                (/\b\d{4}\b/.test(a.raw_timing) ? ' These dates are approximate; adjust them below if needed.' : ' The year was assumed; check it.')}
             </p>
           )}
           <div className="mt-1 grid grid-cols-2 gap-2">
