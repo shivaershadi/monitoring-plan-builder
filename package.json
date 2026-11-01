@@ -20,14 +20,14 @@
     "bank:countries": "tsx bank/scripts/build-countries.ts"
   },
   "dependencies": {
-    "react": "^18.3.1",
+    "react": "^19.3.1",
     "react-dom": "^18.3.1",
     "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz",
     "zod": "^4.6.7"
   },
   "devDependencies": {
     "@types/node": "^26.6.5",
-    "@types/react": "^18.3.12",
+    "@types/react": "^19.3.0",
     "@types/react-dom": "^18.3.1",
     "@typescript-eslint/eslint-plugin": "^8.72.1",
     "@typescript-eslint/parser": "^8.72.1",
